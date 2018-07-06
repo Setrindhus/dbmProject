@@ -11,6 +11,6 @@ app.use(api);
 app.use(frontoffice);
 app.use(backoffice);
 
-var server = app.listen({{port}}, function(){
-    console.log('Example app listening on port {{port}}');
+var server = app.listen(8083, function(){
+    console.log('Example app listening on port 8083');
 });

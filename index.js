@@ -47,8 +47,8 @@ app.post('/generate', function (){
     });
 });
 
-var server = app.listen(8081, function (){
-    var host = server.address().address
-    var port = server.address().port
+var servidor = app.listen(8081, function (){
+    var host = servidor.address().address
+    var port = servidor.address().port
     console.log("Listening at http://%s:%s",host,port)
 });

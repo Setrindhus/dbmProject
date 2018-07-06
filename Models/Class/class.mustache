@@ -1,0 +1,33 @@
+const dbname = './/Database/DataBase.db';
+
+function {{title}} ({{propertiesJoin}}) {
+    {{#properties}}
+        this.{{name}} = {{name}};
+        {{^required}}Object.defineProperty(this,'{{name}}',{ enumerable:false});{{/required}}         
+    {{/properties}}
+        Object.defineProperty(this,'{{primaryKey.name}}',{ enumerable:false});
+}
+
+var database = require('../../Models/Database/sqlite.js')(dbname);
+
+{{title}}.all = function (callback) {
+    database.all('Select * From {{title}}',{{title}},callback)
+}
+
+{{title}}.get = function (id, callback) {
+    database.get('Select * From {{title}}} Where {{table}}_id = ?', [id], {{title}},callback)
+}
+
+{{title}}.prototype.save = function (callback) {
+    if(this.{{primaryKey.name}}) { //Se existir valor no id serÃ¡ para update
+        database.run('Update {{title}} Set {{{propertiesSetValues}}} Where {{table}}_id = ?', [{{{propertiesJoinThis}}},id], callback);
+    } else { //caso contrÃ¡rio para insert
+        database.run('Insert Into {{title}} ({{{propertiesJoin}}}) Values ({{{propertiesValuesParams}}})',[{{{propertiesJoinThis}}}], callback);
+    }
+}
+
+{{title}}.mappingDBtoObject = {
+    {{{mappingDBtoObject}}}
+}
+
+module.exports = {{title}};

@@ -1,0 +1,32 @@
+[
+    {
+      "numero": "10000001",
+      "nome": "António",
+      "morada": "Rua do António",
+      "notafinal": "15"
+    },
+    {
+      "numero": "10000002",
+      "nome": "André",
+      "morada": "Rua do André",
+      "notafinal": "12"
+    },
+    {
+      "numero": "10000003",
+      "nome": "David",
+      "morada": "Rua do David",
+      "notafinal": "13"
+    },
+    {
+      "numero": "10000004",
+      "nome": "Diogo",
+      "morada": "Rua do Diogo",
+      "notafinal": "11"
+    },
+    {
+      "numero": "10000005",
+      "nome": "Manuel",
+      "morada": "Rua do Manuel",
+      "notafinal": "17"
+    }
+  ]

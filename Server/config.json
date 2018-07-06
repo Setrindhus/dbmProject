@@ -1,0 +1,31 @@
+{
+    "port": 8083,
+    "dbname": "labs.db",
+    "models":
+    [
+        {
+            "name": "Categoria.json",
+            "path": "./Models/Schemas/"
+        },
+        {
+            "name": "Marca.json",
+            "path": "./Models/Schemas/"
+        },
+        {
+            "name": "Produto.json",
+            "path": "./Models/Schemas/"
+        },
+        {
+            "name": "Venda.json",
+            "path":"./Models/Schemas/"
+        }
+    ],
+    "modules":
+    [
+        "express",
+        "mustache",
+        "child_process",
+        "mkdir",
+        "del"
+    ]
+}

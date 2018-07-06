@@ -1,0 +1,22 @@
+var express = require('express');
+var router = express.Router();
+
+/**
+* Método que faz o mapeamento entre um objeto retornado pelo módulo sqlite num objeto de uma classe
+criada
+* @param {any} object Representa o objeto retornado pela query à abse de dados
+* @param {any} type Representa o tipo de objeto que se pretende converter
+* @returns Devolve um objeto do tipo "type" com o conteúdo que está no objeto "object"
+*/
+function mapping(object, type) {
+    var obj = new type();
+    Object.keys(object).forEach(function (value) {
+        if (obj.hasOwnProperty(value)) //Se o objeto possuir o atributo que se está a verificar então recebe o valor retornado da query da base de dados
+        obj[value] = object[value];
+    });
+    return obj;
+}
+
+{{{calls}}}
+
+module.exports = router;

@@ -2,8 +2,11 @@ var express = require('express');
 var app = express();
 var bodyParser = require("body-parser");
 
-app.use(bodyParser.urlencoded());
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(__dirname + 'Publish/Public'));
+app.use('/api','./Controllers/api.js');
+app.use('/','./Controllers/frontoffice.js');
+app.use('/backoffice','./Controllers/backoffice.js');
 
 app.get("/", function (req, res) {
     res.sendFile(__dirname + "/Public/index.html");

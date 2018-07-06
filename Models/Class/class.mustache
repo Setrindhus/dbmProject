@@ -18,6 +18,12 @@ var database = require('../../Models/Database/sqlite.js')(dbname);
     database.get('Select * From {{title}}} Where {{table}}_id = ?', [id], {{title}},callback)
 }
 
+{{title}}.delete = function (id, callback) {
+    if(this.{{primaryKey.name}}){
+        database.run('Delete From {{title}} Where {{table}}_id = ?', [{{{propertiesJoinThis}}},id],callback);
+    }
+}
+
 {{title}}.prototype.save = function (callback) {
     if(this.{{primaryKey.name}}) { //Se existir valor no id serÃ¡ para update
         database.run('Update {{title}} Set {{{propertiesSetValues}}} Where {{table}}_id = ?', [{{{propertiesJoinThis}}},id], callback);

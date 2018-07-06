@@ -11,6 +11,8 @@ var child_process = require('child_process');
 var server = require('./Server/server');
 var bd = require('./Models/Database/generate-database');
 var classes = require('./Models/Class/generate-class');
+var api = require('./Models/API/generate_api');
+var offices = require('./Server/generate-offices');
 
 app.use(bodyParser.urlencoded());
 app.use(express.static('public'));
@@ -32,14 +34,16 @@ app.post('/generate', function (){
         mkdirp.sync('./Publish/Public/Images');
         mkdirp.sync('./Publish/Public/Js');
 
-        /*
-        server.gerarServidor();
-        child_process.fork('./Publish/index.js');
-        */
-
         classes.criarClasses();
 
-        bd.generate();
+        bd.gerarBD();
+
+        api.gerarApi();
+
+        offices.gerarOffices();
+
+        server.gerarServidor();
+        child_process.fork('./Publish/index.js');
     });
 });
 

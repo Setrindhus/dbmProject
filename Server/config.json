@@ -1,6 +1,13 @@
 {
     "port": 8083,
     "dbname": "labs.db",
+    "staticFiles":
+    [
+        {
+            "originalPath": "../Models/Database/sqlite.js",
+            "destinationPath": "../Publish/Database"
+        }
+    ],
     "models":
     [
         {

@@ -2,7 +2,7 @@ var fs = require('fs');
 var mustache = require('mustache');
 var sqlite3 = require('sqlite3').verbose();
 
-function generate() {
+function gerarBD() {
 
     var conf = JSON.parse(fs.readFileSync("./Server/config.json"));
     var db = new sqlite3.Database("./Publish/Database/" + conf.dbname);
@@ -92,7 +92,6 @@ function serializarDB(db, conjuntoDeTables){
     db.serialize(function () {
         tabelas.forEach(element => {
             db.run(element, function () {
-                console.log(element);
             });
         });
     });
@@ -103,4 +102,4 @@ function serializarDB(db, conjuntoDeTables){
     });
 }
 
-module.exports.generate = generate;
+module.exports.gerarBD = gerarBD;

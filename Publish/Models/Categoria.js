@@ -18,6 +18,12 @@ Categoria.get = function (id, callback) {
     database.get('Select * From Categoria} Where categoria_id = ?', [id], Categoria,callback)
 }
 
+Categoria.delete = function (id, callback) {
+    if(this.id){
+        database.run('Delete From Categoria Where categoria_id = ?', [this.id,this.nome,id],callback);
+    }
+}
+
 Categoria.prototype.save = function (callback) {
     if(this.id) { //Se existir valor no id serÃ¡ para update
         database.run('Update Categoria Set id = ?,nome = ? Where categoria_id = ?', [this.id,this.nome,id], callback);

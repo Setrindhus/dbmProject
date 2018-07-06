@@ -20,6 +20,12 @@ Produto.get = function (id, callback) {
     database.get('Select * From Produto} Where produto_id = ?', [id], Produto,callback)
 }
 
+Produto.delete = function (id, callback) {
+    if(this.id){
+        database.run('Delete From Produto Where produto_id = ?', [this.id,this.nome,this.preco,id],callback);
+    }
+}
+
 Produto.prototype.save = function (callback) {
     if(this.id) { //Se existir valor no id serÃ¡ para update
         database.run('Update Produto Set id = ?,nome = ?,preco = ? Where produto_id = ?', [this.id,this.nome,this.preco,id], callback);

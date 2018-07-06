@@ -1,0 +1,7 @@
+app.get('/{{title}}',function(req,res) {
+    res.send('View: Backoffice {{title}}');
+});
+
+app.get('/{{title}}/detalhe/:id',function(req,res) {
+    res.send('View: Backoffice {{title}} Detalhe');
+});

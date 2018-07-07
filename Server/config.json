@@ -6,7 +6,20 @@
         {
             "originalPath": "../Models/Database/sqlite.js",
             "destinationPath": "../Publish/Database"
+        },
+        {
+            "name": "list.mustache",
+            "path": "./StaticFiles/"
+        },
+        {
+            "name": "form.mustache",
+            "path": "./StaticFiles/"
+        },
+        {
+            "name": "details.mustache",
+            "path": "./StaticFiles/"
         }
+
     ],
     "models":
     [

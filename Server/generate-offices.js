@@ -28,7 +28,10 @@ function criarOffices(backoffice){
             throw err;
         }
         let view = {
-            methods: "app.get('/',function(req,res) {\n res.send('View: Frontoffice'); \n});"
+            methods: "app.get('/', function (req, res) {"
+            +"res.render('index', {"
+            +"port: '8083'"
+            +"}) });"
         };
         frontoffice += "\n" + mustache.render(data.toString(), view);
 

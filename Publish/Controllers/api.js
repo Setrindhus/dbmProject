@@ -88,41 +88,6 @@ router.delete('/Marca/:id', function (req, res) {
         });
     });
 });
-var Produto = require('../Models/Produto.js');
-
-router.post('/Produto', function (req, res) {
-    mapping(req.body, Produto).save(); //converte o objeto retornado no corpo do pedido num objeto do tipo da classe
-});
-
-router.get('/Produto', function (req, res) {
-    Produto.all(function (rows) { //função de callback que quando for retornado os dados na base de dados, os mesmos serão enviados em json
-        res.json(rows);
-    });
-});
-
-router.get('/Produto/:id', function (req, res) {
-    Produto.get(req.params.id, function (row) {
-    res.json(row);
-    });
-});
-
-router.put('/Produto/:id', function (req, res) { //o id tanto poderia ir no corpo da mensagem como por parâmetro no url
-    var obj = mapping(req.body, Produto);
-    obj.id = req.params.id; //no caso de ir no corpo da mensagem tem de se fazer a atribuição do id após o mapeamento do objeto
-    obj.save(function (err) { //devolve true em caso de ter feito o save sem qualquer erro
-        res.json({
-            success: !err
-        });
-    });
-});
-
-router.delete('/Produto/:id', function (req, res) {
-    Produto.delete(req.params.id, function (err) {
-        res.json({
-            success: !err
-        });
-    });
-});
 var Venda = require('../Models/Venda.js');
 
 router.post('/Venda', function (req, res) {

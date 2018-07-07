@@ -1,4 +1,34 @@
 app.get('/backoffice/{{title}}',function(req,res) {
+    fs.readFile('./Server/list.mustache', function (err, data) {
+        if (err) {
+            throw err;
+        }
+        let view = {
+            title: '{{title}}',
+            columns: ,
+            rows : [{
+                properties: [{{value}}],
+                actions: [{
+                    link: '#',
+                    tooltip: 'Apagar',
+                    events: [{
+                        name: "onclick",
+                        function: "apagar",
+                        args: 
+                    }],
+                    label: '',
+                    image:{
+                        src: '/Public/Images/delete.png',
+                        alt: "delete"
+                    }
+                }]
+            }]
+        }
+        let output = mustache.render(data.toString(), view);
+        fs.writeFile('./Publish/Controllers/backoffice.js' , output, function () {
+            console.log("Created backoffice.js");
+        });
+    });
     res.send('View: Backoffice {{title}}');
 });
 

@@ -28,10 +28,17 @@ function criarOffices(backoffice){
             throw err;
         }
         let view = {
-            methods: "app.get('/', function (req, res) {"
+            /*methods: "app.get('/', function (req, res) {"
             +"res.render('index', {"
             +"port: '8083'"
-            +"}) });"
+            +"}) });"*/
+            /*methods: "app.get('/', function (req, res) {"
+            +"res.render('index', {"+
+                "title: 'Hey'," +
+                "message: 'Hello there!'"+
+                "}) });"*/
+                methods: "app.get('/',function(req,res) {\n res.send('View: Frontoffice'); \n});"
+                
         };
         frontoffice += "\n" + mustache.render(data.toString(), view);
 

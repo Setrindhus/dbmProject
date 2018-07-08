@@ -1,5 +1,5 @@
 app.get('/backoffice/{{title}}',function(req,res) {
-    fs.readFile('./Server/list.mustache', function (err, data) {
+    fs.readFile('./StaticFiles/list.mustache', function (err, data) {
         if (err) {
             throw err;
         }
@@ -30,7 +30,7 @@ app.get('/backoffice/{{title}}',function(req,res) {
         }
         let output = mustache.render(data.toString(), view);
         fs.writeFile('./Publish/Views/{{title}}.html' , output, function () {
-            console.log("Created backoffice.html");
+            console.log("Created {{title}}.html");
         });
     });
     res.send('View: Backoffice {{title}}');

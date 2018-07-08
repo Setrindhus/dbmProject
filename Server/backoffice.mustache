@@ -3,9 +3,13 @@ app.get('/backoffice/{{title}}',function(req,res) {
         if (err) {
             throw err;
         }
+        var object = new {{title}}();
         let view = {
             title: '{{title}}',
-            columns: ,
+            columns: Object.keys(new {{title}}()).map(key =>{
+                return {
+                    name: key};
+            }),
             rows : [{
                 properties: [{{value}}],
                 actions: [{
@@ -14,19 +18,19 @@ app.get('/backoffice/{{title}}',function(req,res) {
                     events: [{
                         name: "onclick",
                         function: "apagar",
-                        args: 
+                        args: object.id
                     }],
                     label: '',
                     image:{
-                        src: '/Public/Images/delete.png',
-                        alt: "delete"
+                        src: '/StaticFiles/delete.png',
+                        alt: "apagar"
                     }
                 }]
             }]
         }
         let output = mustache.render(data.toString(), view);
-        fs.writeFile('./Publish/Controllers/backoffice.js' , output, function () {
-            console.log("Created backoffice.js");
+        fs.writeFile('./Publish/Views/{{title}}.html' , output, function () {
+            console.log("Created backoffice.html");
         });
     });
     res.send('View: Backoffice {{title}}');

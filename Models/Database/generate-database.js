@@ -5,7 +5,7 @@ var sqlite3 = require('sqlite3').verbose();
 function gerarBD() {
 
     var conf = JSON.parse(fs.readFileSync("./Server/config.json"));
-    var db = new sqlite3.Database("./Publish/Database/" + conf.dbname);
+    var db = new sqlite3.Database("./Publish/Database/" + conf.dbname +".db");
 
     var conjuntoDeTables = "";
 

@@ -11,6 +11,8 @@ var Venda = require('../Models/Venda.js');
 var VendaSchema = require('../Models/VendaSchema.js');
 var Produto = require('../Models/Produto.js');
 var ProdutoSchema = require('../Models/ProdutoSchema.js');
+var VendaDetalhe = require('../Models/VendaDetalhe.js');
+var VendaDetalheSchema = require('../Models/VendaDetalheSchema.js');
 
 app.use(bodyParser.urlencoded({ extended: true }));
 

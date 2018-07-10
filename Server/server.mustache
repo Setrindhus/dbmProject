@@ -8,9 +8,9 @@ var mustacheExpress = require('mustache-express');
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(__dirname + 'Publish/Public'));
-app.use(api);
-app.use(frontoffice);
-app.use(backoffice);
+app.use('/api', api);
+app.use('/', frontoffice);
+app.use('/backoffice', backoffice);
 
 app.engine('mustache', mustacheExpress());
 app.set('view engine', 'mustache'); //extensão dos ficheiros das views

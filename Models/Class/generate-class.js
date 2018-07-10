@@ -36,10 +36,11 @@ function copyFileContent(savPath, srcPath) {
     });
 }
 function generateSchemas(){
-    copyFileContent('./Publish/Models/categoriaSchema.js', './Models/Schemas/Categoria.js');
-    copyFileContent('./Publish/Models/marcaSchema.js', './Models/Schemas/Marca.js');
-    copyFileContent('./Publish/Models/produtoSchema.js', './Models/Schemas/Produto.js');
-    copyFileContent('./Publish/Models/vendaSchema.js', './Models/Schemas/Venda.js');
+    copyFileContent('./Publish/Models/CategoriaSchema.js', './Models/Schemas/Categoria.js');
+    copyFileContent('./Publish/Models/MarcaSchema.js', './Models/Schemas/Marca.js');
+    copyFileContent('./Publish/Models/ProdutoSchema.js', './Models/Schemas/Produto.js');
+    copyFileContent('./Publish/Models/VendaSchema.js', './Models/Schemas/Venda.js');
+    copyFileContent('./Publish/Models/VendaDetalheSchema.js', './Models/Schemas/VendaDetalhe.js');
     
 
     //sqlite para a pasta Database
@@ -50,6 +51,9 @@ function generateSchemas(){
     copyFileContent('./Publish/Views/list.mustache', './StaticFiles/list.mustache');
     copyFileContent('./Publish/Views/form.mustache', './StaticFiles/form.mustache');
     copyFileContent('./Publish/Views/index.mustache', './StaticFiles/index.mustache');
+    copyFileContent('./Publish/Public/Images/read.png', './StaticFiles/read.png');
+    copyFileContent('./Publish/Public/Images/delete.png', './StaticFiles/delete.png');
+    copyFileContent('./Publish/Public/Images/edit.png', './StaticFiles/edit.png');
 }
 
 function getView(schema) {

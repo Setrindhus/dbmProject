@@ -19,7 +19,7 @@ app.get('/{{title}}',function(req,res) {
                             label: '',
                             link: '#',
                             image:{
-                                src: './StaticFiles/delete.png',
+                                src: './Public/Images/delete.png',
                                 alt: 'Apagar'
                             },
                             tooltip: 'Apagar',
@@ -32,7 +32,7 @@ app.get('/{{title}}',function(req,res) {
                             label: '',
                             link: './{{title}}/detalhe' + obj.id,
                             image:{
-                                src: './StaticFiles/read.png',
+                                src: './Public/Images/read.png',
                                 alt: 'Detalhes'
                             },
                             tooltip: 'Detalhe'
@@ -40,7 +40,7 @@ app.get('/{{title}}',function(req,res) {
                             label: '',
                             link: './{{title}}/editar/' + obj.id,
                             image:{
-                                src: './StaticFiles/edit.png',
+                                src: './Public/Images/edit.png',
                                 alt: 'Editar'
                             },
                             tooltip: 'Editar'
@@ -75,8 +75,8 @@ app.get('/{{title}}/detalhe/:id',function(req,res) {
                         allReferences.push({
                             label: r.label,
                             model: r.model,
-                            values: r.relation == "M-M" ? {{db}} + '/' + req.params.id :
-                                p[(r.model + "_id").toLowerCase()]
+                            values: r.relation == "M-M" ? {{title}} + '/' + req.params.id :
+                                props[(r.model + "_id").toLowerCase()]
                         });
                     });
                 }
@@ -89,10 +89,11 @@ app.get('/{{title}}/detalhe/:id',function(req,res) {
     });
 });
 
-app.get('/{{title}}/inserir/:id',function(req,res) {
+app.get('/{{title}}/inserir',function(req,res) {
     res.render('form',{
 properties: function() {
     var array = [];
+    var rows = Object.getOwnPropertyNames(new {{title}}());
     rows.forEach(element => {
         props = {{schema}}.properties;
         if (props.hasOwnProperty(element)) {
@@ -110,10 +111,12 @@ properties: function() {
                 if ({{schema}}.references) {
                     {{schema}}.references.forEach(function (r) {
                         allRefs.push({
+                            id: r.model.concat('Id'),
                             label: r.label,
                             model: r.model,
-                            values: r.relation == "M-M" ? {{db}} + '/' + req.params.id :
-                                props[(r.model + "_id").toLowerCase()]
+                            relation: r.relation == '1-M',
+                            type : 'insert',
+                            bdId: ref.model.toLowerCase().concat('_id')
                         });
                     });
                 }
@@ -145,7 +148,7 @@ app.get('/{{title}}/editar/:id',function(req,res){
 	                    array.push({ name: element, minimum: min, maximum: max, value: props[element] });		
 	                }		
 	            });		
-	            return arr;		
+	            return array;		
 	        },		
 	        references: function () {		
 	            var allReferences = [];		
@@ -162,7 +165,7 @@ app.get('/{{title}}/editar/:id',function(req,res){
                                 var x;
                                 if(this.relation)
                                     x = props[(ref.model + "_id").toLowerCase()]
-                                else x = '{{db}}/' + req.params.id
+                                else x = '{{title}}/' + req.params.id
                                 return x;
                             }
 	                    });		

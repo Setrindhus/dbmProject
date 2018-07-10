@@ -15,7 +15,7 @@ function gerarOffices(){
             let view = {
                 title: classe.title,
                 schema: classe.title + 'Schema',
-                db: config.dbname
+                //db: config.dbname
             }
             backoffice += "\n" + mustache.render(data.toString(), view);
 

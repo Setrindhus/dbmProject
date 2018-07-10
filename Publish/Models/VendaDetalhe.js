@@ -1,4 +1,5 @@
-const dbname = './/Database/DataBase.db';
+//const dbname = './/Database/DataBase.db';
+const dbname = './Publish/Database/DataBase.db';
 
 function VendaDetalhe (id) {
         this.id = id;

@@ -38,6 +38,10 @@
         {
             "name": "Venda.json",
             "path":"./Models/Schemas/"
+        },
+        {
+            "name": "VendaDetalhe.json",
+            "path": "./Models/Schemas/"
         }
     ],
     "modules":

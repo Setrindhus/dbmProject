@@ -1,9 +1,7 @@
 const dbname = './/Database/DataBase.db';
 
-function Venda (id,produtosArray,preco) {
+function Venda (id,preco) {
         this.id = id;
-                 
-        this.produtosArray = produtosArray;
                  
         this.preco = preco;
                  
@@ -22,15 +20,15 @@ Venda.get = function (id, callback) {
 
 Venda.delete = function (id, callback) {
     if(this.id){
-        database.run('Delete From Venda Where venda_id = ?', [this.id,this.produtosArray,this.preco,id],callback);
+        database.run('Delete From Venda Where venda_id = ?', [this.id,this.preco,id],callback);
     }
 }
 
 Venda.prototype.save = function (callback) {
     if(this.id) { //Se existir valor no id serÃ¡ para update
-        database.run('Update Venda Set id = ?,produtosArray = ?,preco = ? Where venda_id = ?', [this.id,this.produtosArray,this.preco,id], callback);
+        database.run('Update Venda Set id = ?,preco = ? Where venda_id = ?', [this.id,this.preco,id], callback);
     } else { //caso contrÃ¡rio para insert
-        database.run('Insert Into Venda (id,produtosArray,preco) Values (?,?,?)',[this.id,this.produtosArray,this.preco], callback);
+        database.run('Insert Into Venda (id,preco) Values (?,?)',[this.id,this.preco], callback);
     }
 }
 
@@ -40,7 +38,7 @@ Venda.many = function (model, id, callback) {
 }
 
 Venda.mappingDBtoObject = {
-    id:'id',produtosarray:'produtosArray',preco:'preco',venda_id:'id'
+    id:'id',preco:'preco',venda_id:'id'
 }
 
 module.exports = Venda;

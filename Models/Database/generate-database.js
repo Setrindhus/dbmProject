@@ -25,7 +25,7 @@ function gerarBD() {
             else if (json.properties[prop].type == "string") {
                 tableElements += "TEXT";
             }
-            else if(json.properties[prop].type == "integer") {
+            else if (json.properties[prop].type == "integer") {
                 tableElements += "INTEGER";
             }
 
@@ -64,19 +64,16 @@ function gerarBD() {
 
 }
 
-function getFKs(json){
+function getFKs(json) {
     var fk = "";
     if (json.hasOwnProperty('references')) {
         json.references.forEach(model => {
-            if (model.relation === "M-M"){
-                fk += gerarTabela();
-            } else {
-                var name = model.model;
-                var nameLower = name.toLowerCase();
-                fk += `ALTER TABLE ${json.title} ADD COLUMN ${nameLower}_id INTEGER REFERENCES ${name} (${nameLower}_id);\n`;
-                if (model.relation === "1-1"){
-                    fk += `CREATE UNIQUE INDEX IF NOT EXISTS ${nameLower}_unique ON ${json.title} (${nameLower});\n`;
-                }
+            var name = model.model;
+            var nameLower = name.toLowerCase();
+            fk += `ALTER TABLE ${json.title} ADD COLUMN ${nameLower}_id INTEGER REFERENCES ${name} (${nameLower}_id);\n`;
+            if (model.relation === "1-1") {
+                fk += `CREATE UNIQUE INDEX IF NOT EXISTS ${nameLower}_unique ON ${json.title} (${nameLower});\n`;
+
             }
         });
     }
@@ -84,7 +81,7 @@ function getFKs(json){
     return s;
 }
 
-function serializarDB(db, conjuntoDeTables){
+function serializarDB(db, conjuntoDeTables) {
 
     var tabelas = conjuntoDeTables.split(";");
     tabelas.pop(tabelas.size - 1);

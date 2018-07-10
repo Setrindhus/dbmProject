@@ -8,13 +8,6 @@
             "type": "integer",
             "unique": true
         },
-        "produtosArray": {
-            "description": "Array de produtos",
-            "type": "array",
-            "items": {
-                "type": "object"
-            }
-        },
         "preco": {
             "description": "Preço da venda",
             "type": "integer",

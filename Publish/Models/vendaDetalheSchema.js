@@ -1,4 +1,4 @@
-{
+module.exports = {
     "title": "VendaDetalhe",
     "description": "Produtos numa venda",
     "type": "object",

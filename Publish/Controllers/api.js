@@ -158,5 +158,40 @@ router.delete('/Venda/:id', function (req, res) {
         });
     });
 });
+var VendaDetalhe = require('../Models/VendaDetalhe.js');
+
+router.post('/VendaDetalhe', function (req, res) {
+    mapping(req.body, VendaDetalhe).save(); //converte o objeto retornado no corpo do pedido num objeto do tipo da classe
+});
+
+router.get('/VendaDetalhe', function (req, res) {
+    VendaDetalhe.all(function (rows) { //função de callback que quando for retornado os dados na base de dados, os mesmos serão enviados em json
+        res.json(rows);
+    });
+});
+
+router.get('/VendaDetalhe/:id', function (req, res) {
+    VendaDetalhe.get(req.params.id, function (row) {
+        res.json(row);
+    });
+});
+
+router.put('/VendaDetalhe/:id', function (req, res) { //o id tanto poderia ir no corpo da mensagem como por parâmetro no url
+    var obj = mapping(req.body, VendaDetalhe);
+    obj.id = req.params.id; //no caso de ir no corpo da mensagem tem de se fazer a atribuição do id após o mapeamento do objeto
+    obj.save(function (err) { //devolve true em caso de ter feito o save sem qualquer erro
+        res.json({
+            success: !err
+        });
+    });
+});
+
+router.delete('/VendaDetalhe/:id', function (req, res) {
+    VendaDetalhe.delete(req.params.id, function (err) {
+        res.json({
+            success: !err
+        });
+    });
+});
 
 module.exports = router;

@@ -14,8 +14,6 @@ var ProdutoSchema = require('../Models/ProdutoSchema.js');
 app.use(bodyParser.urlencoded({ extended: true }));
 
 
-
-
 app.get('/Categoria',function(req,res) {
     Categoria.all(function(rows){
             res.render('list',{

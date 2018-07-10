@@ -1,10 +1,10 @@
 //const dbname = './/Database/DataBase.db';
 const dbname = './Publish/Database/DataBase.db';
 
-function Marca (id,nome) {
+function Marca (id,marca_nome) {
         this.id = id;
                  
-        this.nome = nome;
+        this.marca_nome = marca_nome;
                  
         Object.defineProperty(this,'id',{ enumerable:false});
 }
@@ -21,15 +21,15 @@ Marca.get = function (id, callback) {
 
 Marca.delete = function (id, callback) {
     if(this.id){
-        database.run('Delete From Marca Where marca_id = ?', [this.id,this.nome,id],callback);
+        database.run('Delete From Marca Where marca_id = ?', [this.id,this.marca_nome,id],callback);
     }
 }
 
 Marca.prototype.save = function (callback) {
     if(this.id) { //Se existir valor no id serÃ¡ para update
-        database.run('Update Marca Set id = ?,nome = ? Where marca_id = ?', [this.id,this.nome,id], callback);
+        database.run('Update Marca Set id = ?,marca_nome = ? Where marca_id = ?', [this.id,this.marca_nome,id], callback);
     } else { //caso contrÃ¡rio para insert
-        database.run('Insert Into Marca (id,nome) Values (?,?)',[this.id,this.nome], callback);
+        database.run('Insert Into Marca (id,marca_nome) Values (?,?)',[this.id,this.marca_nome], callback);
     }
 }
 
@@ -39,7 +39,7 @@ Marca.many = function (model, id, callback) {
 }
 
 Marca.mappingDBtoObject = {
-    id:'id',nome:'nome',marca_id:'id'
+    id:'id',marca_nome:'marca_nome',marca_id:'id'
 }
 
 module.exports = Marca;

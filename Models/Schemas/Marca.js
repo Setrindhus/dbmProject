@@ -8,13 +8,13 @@ module.exports = {
             "type": "integer",
             "unique": true
         },
-        "nome": {
+        "marca_nome": {
             "description": "Nome da marca",
             "type": "string"
         }
     },
     "required": [
         "id",
-        "nome"
+        "marca_nome"
     ]
 }

@@ -19,7 +19,7 @@ app.get('/{{title}}',function(req,res) {
                             label: '',
                             link: '#',
                             image:{
-                                src: './Public/Images/delete.png',
+                                src: '../../Images/delete.png',
                                 alt: 'Apagar'
                             },
                             tooltip: 'Apagar',
@@ -32,7 +32,7 @@ app.get('/{{title}}',function(req,res) {
                             label: '',
                             link: './{{title}}/detalhe' + obj.id,
                             image:{
-                                src: './Public/Images/read.png',
+                                src: '../../Images/read.png',
                                 alt: 'Detalhes'
                             },
                             tooltip: 'Detalhe'
@@ -40,7 +40,7 @@ app.get('/{{title}}',function(req,res) {
                             label: '',
                             link: './{{title}}/editar/' + obj.id,
                             image:{
-                                src: './Public/Images/edit.png',
+                                src: '../../Images/edit.png',
                                 alt: 'Editar'
                             },
                             tooltip: 'Editar'
@@ -110,13 +110,13 @@ properties: function() {
                 var allReferences = [];
                 if ({{schema}}.references) {
                     {{schema}}.references.forEach(function (r) {
-                        allRefs.push({
+                        allReferences.push({
                             id: r.model.concat('Id'),
                             label: r.label,
                             model: r.model,
                             relation: r.relation == '1-M',
                             type : 'insert',
-                            bdId: ref.model.toLowerCase().concat('_id')
+                            bdId: r.model.toLowerCase().concat('_id')
                         });
                     });
                 }
@@ -124,7 +124,8 @@ properties: function() {
             },
             get hasReferences() {
                 return this.references().length > 0;
-            }
+            },
+            modelname: {{title}}
         });
     });
 

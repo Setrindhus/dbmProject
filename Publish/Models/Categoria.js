@@ -1,10 +1,10 @@
 //const dbname = './/Database/DataBase.db';
 const dbname = './Publish/Database/DataBase.db';
 
-function Categoria (id,nome) {
+function Categoria (id,categoria_nome) {
         this.id = id;
                  
-        this.nome = nome;
+        this.categoria_nome = categoria_nome;
                  
         Object.defineProperty(this,'id',{ enumerable:false});
 }
@@ -21,15 +21,15 @@ Categoria.get = function (id, callback) {
 
 Categoria.delete = function (id, callback) {
     if(this.id){
-        database.run('Delete From Categoria Where categoria_id = ?', [this.id,this.nome,id],callback);
+        database.run('Delete From Categoria Where categoria_id = ?', [this.id,this.categoria_nome,id],callback);
     }
 }
 
 Categoria.prototype.save = function (callback) {
     if(this.id) { //Se existir valor no id serÃ¡ para update
-        database.run('Update Categoria Set id = ?,nome = ? Where categoria_id = ?', [this.id,this.nome,id], callback);
+        database.run('Update Categoria Set id = ?,categoria_nome = ? Where categoria_id = ?', [this.id,this.categoria_nome,id], callback);
     } else { //caso contrÃ¡rio para insert
-        database.run('Insert Into Categoria (id,nome) Values (?,?)',[this.id,this.nome], callback);
+        database.run('Insert Into Categoria (id,categoria_nome) Values (?,?)',[this.id,this.categoria_nome], callback);
     }
 }
 
@@ -39,7 +39,7 @@ Categoria.many = function (model, id, callback) {
 }
 
 Categoria.mappingDBtoObject = {
-    id:'id',nome:'nome',categoria_id:'id'
+    id:'id',categoria_nome:'categoria_nome',categoria_id:'id'
 }
 
 module.exports = Categoria;

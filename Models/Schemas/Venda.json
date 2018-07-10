@@ -8,7 +8,7 @@
             "type": "integer",
             "unique": true
         },
-        "preco": {
+        "venda_preco": {
             "description": "Preço da venda",
             "type": "integer",
             "minimum": 0
@@ -16,7 +16,6 @@
     },
     "required": [
         "id",
-        "produtosArray",
-        "preco"
+        "venda_preco"
     ]
 }

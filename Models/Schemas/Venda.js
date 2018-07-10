@@ -8,7 +8,7 @@ module.exports = {
             "type": "integer",
             "unique": true
         },
-        "preco": {
+        "venda_preco": {
             "description": "Preço da venda",
             "type": "integer",
             "minimum": 0
@@ -16,7 +16,7 @@ module.exports = {
     },
     "required": [
         "id",
-        "produtosArray",
-        "preco"
+        //"produtosArray",
+        "venda_preco"
     ]
 };

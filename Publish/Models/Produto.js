@@ -1,12 +1,12 @@
 //const dbname = './/Database/DataBase.db';
 const dbname = './Publish/Database/DataBase.db';
 
-function Produto (id,nome,preco) {
+function Produto (id,produto_nome,produto_preco) {
         this.id = id;
                  
-        this.nome = nome;
+        this.produto_nome = produto_nome;
                  
-        this.preco = preco;
+        this.produto_preco = produto_preco;
                  
         Object.defineProperty(this,'id',{ enumerable:false});
 }
@@ -23,15 +23,15 @@ Produto.get = function (id, callback) {
 
 Produto.delete = function (id, callback) {
     if(this.id){
-        database.run('Delete From Produto Where produto_id = ?', [this.id,this.nome,this.preco,id],callback);
+        database.run('Delete From Produto Where produto_id = ?', [this.id,this.produto_nome,this.produto_preco,id],callback);
     }
 }
 
 Produto.prototype.save = function (callback) {
     if(this.id) { //Se existir valor no id serÃ¡ para update
-        database.run('Update Produto Set id = ?,nome = ?,preco = ? Where produto_id = ?', [this.id,this.nome,this.preco,id], callback);
+        database.run('Update Produto Set id = ?,produto_nome = ?,produto_preco = ? Where produto_id = ?', [this.id,this.produto_nome,this.produto_preco,id], callback);
     } else { //caso contrÃ¡rio para insert
-        database.run('Insert Into Produto (id,nome,preco) Values (?,?,?)',[this.id,this.nome,this.preco], callback);
+        database.run('Insert Into Produto (id,produto_nome,produto_preco) Values (?,?,?)',[this.id,this.produto_nome,this.produto_preco], callback);
     }
 }
 
@@ -41,7 +41,7 @@ Produto.many = function (model, id, callback) {
 }
 
 Produto.mappingDBtoObject = {
-    id:'id',nome:'nome',preco:'preco',produto_id:'id'
+    id:'id',produto_nome:'produto_nome',produto_preco:'produto_preco',produto_id:'id'
 }
 
 module.exports = Produto;

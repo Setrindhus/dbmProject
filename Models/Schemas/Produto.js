@@ -8,11 +8,11 @@ module.exports = {
             "type": "integer",
             "unique": true
         },
-        "nome": {
+        "produto_nome": {
             "description": "Nome do produto",
             "type": "string"
         },
-        "preco": {
+        "produto_preco": {
             "description": "Preço do produto",
             "type": "number",
             "minimum": 0
@@ -20,8 +20,8 @@ module.exports = {
     },
     "required": [
         "id",
-        "nome",
-        "preco",
+        "produto_nome",
+        "produto_preco",
         "categoria",
         "marca"
     ],

@@ -9,10 +9,10 @@ module.exports = {
     "type": "integer",
     "unique": true
     },
-    "nome": {
+    "categoria_nome": {
     "description": "Nome da categoria",
     "type": "string"
     }
     },
-    "required": ["id", "nome"]
+    "required": ["id", "categoria_nome"]
 };

@@ -36,14 +36,19 @@ function copyFileContent(savPath, srcPath) {
     });
 }
 function generateSchemas(){
-    copyFileContent('./Publish/Models/CategoriaSchema.js', './Models/Schemas/Categoria.js');
-    copyFileContent('./Publish/Models/MarcaSchema.js', './Models/Schemas/Marca.js');
-    copyFileContent('./Publish/Models/ProdutoSchema.js', './Models/Schemas/Produto.js');
-    copyFileContent('./Publish/Models/VendaSchema.js', './Models/Schemas/Venda.js');
-}
+    copyFileContent('./Publish/Models/categoriaSchema.js', './Models/Schemas/Categoria.js');
+    copyFileContent('./Publish/Models/marcaSchema.js', './Models/Schemas/Marca.js');
+    copyFileContent('./Publish/Models/produtoSchema.js', './Models/Schemas/Produto.js');
+    copyFileContent('./Publish/Models/vendaSchema.js', './Models/Schemas/Venda.js');
 
-function criarSchemas(){
+    //sqlite para a pasta Database
+    copyFileContent('./Publish/Database/sqlite.js','./Models/Database/sqlite.js');
 
+    //copia os staticFiles
+    copyFileContent('./Publish/Views/details.mustache', './StaticFiles/details.mustache');
+    copyFileContent('./Publish/Views/list.mustache', './StaticFiles/list.mustache');
+    copyFileContent('./Publish/Views/form.mustache', './StaticFiles/form.mustache');
+    copyFileContent('./Publish/Views/index.mustache', './StaticFiles/index.mustache');
 }
 
 function getView(schema) {

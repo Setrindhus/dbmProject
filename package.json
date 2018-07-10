@@ -20,6 +20,6 @@
     "mkdirp": "^0.5.1",
     "mustache": "^2.3.0",
     "mustache-express": "^1.2.7",
-    "sqlite3": "^4.0.0"
+    "sqlite3": "^4.0.1"
   }
 }

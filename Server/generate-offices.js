@@ -42,7 +42,7 @@ function criarOffices(backoffice){
                 "title: 'Hey'," +
                 "message: 'Hello there!'"+
                 "}) });"*/
-                methods: "app.get('/',function(req,res) {\n res.send('View: Frontoffice'); \n});"
+                methods: "app.get('/',function(req,res) {\n     res.render('index', {\n         port:'8083'\n   });\n});"
                 
         };
         frontoffice += "\n" + mustache.render(data.toString(), view);

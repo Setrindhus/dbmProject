@@ -1,4 +1,4 @@
-app.get('/backoffice/{{title}}',function(req,res) {
+app.get('/{{title}}',function(req,res) {
     {{title}}.all(function(rows){
             res.render('list',{
                 title: '{{title}}',
@@ -54,7 +54,7 @@ app.get('/backoffice/{{title}}',function(req,res) {
     
 });
 
-app.get('/backoffice/{{title}}/detalhe/:id',function(req,res) {
+app.get('/{{title}}/detalhe/:id',function(req,res) {
     var dados{{title}} = {{title}}.get(req.params.id, function(props){
         res.render('details', {
             properties: function(){
@@ -88,7 +88,7 @@ app.get('/backoffice/{{title}}/detalhe/:id',function(req,res) {
     });
 });
 
-app.get('/backoffice/{{title}}/inserir/:id',function(req,res) {
+app.get('/{{title}}/inserir/:id',function(req,res) {
     res.render('form',{
 properties: function() {
     var array = [];
@@ -126,7 +126,7 @@ properties: function() {
 
 
 
-app.get('/backoffice/{{title}}/editar/:id',function(req,res){
+app.get('/{{title}}/editar/:id',function(req,res){
     var dados{{title}} = {{title}}.get(req.params.id,function(props){
         res.render('form',{
             title: '{{title}}',

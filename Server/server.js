@@ -3,13 +3,14 @@ var mustache = require('mustache');
 
 
 function gerarServidor() {
-    fs.readFile('./Server/index.mustache', function (err, data) {
+    /*fs.readFile('./Server/index.mustache', function (err, data) {
         if (err) {
             throw err;
         }
         processIndex(data);
         iniciarServer();
-    });
+    });*/
+    iniciarServer();
 }
 
 function iniciarServer() {
@@ -21,12 +22,14 @@ function iniciarServer() {
     });
 }
 
+/*
 function processIndex(data) {
     var view = JSON.parse(fs.readFileSync("./Server/config.json"));
     var output = mustache.render(data.toString(), view);
 
     fs.writeFile('./Publish/Public/index.html', output);
 }
+*/
 
 function launchServer(data) {
     var view = JSON.parse(fs.readFileSync("./Server/config.json"));

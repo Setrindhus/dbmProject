@@ -19,6 +19,33 @@ function criarClasses() {
     }
 }
 
+function getFileContent(srcPath, callback) { 
+    fs.readFile(srcPath, 'utf8', function (err, data) {
+        if (err) throw err;
+        callback(data);
+        }
+    );
+}
+
+function copyFileContent(savPath, srcPath) { 
+    getFileContent(srcPath, function(data) {
+        fs.writeFile (savPath, data, function(err) {
+            if (err) throw err;
+            console.log('complete');
+        });
+    });
+}
+function generateSchemas(){
+    copyFileContent('./Publish/Models/CategoriaSchema.js', './Models/Schemas/Categoria.js');
+    copyFileContent('./Publish/Models/MarcaSchema.js', './Models/Schemas/Marca.js');
+    copyFileContent('./Publish/Models/ProdutoSchema.js', './Models/Schemas/Produto.js');
+    copyFileContent('./Publish/Models/VendaSchema.js', './Models/Schemas/Venda.js');
+}
+
+function criarSchemas(){
+
+}
+
 function getView(schema) {
     var view = {
     title: schema.title,
@@ -92,5 +119,6 @@ function getView(classe) {
 */
 
 module.exports.criarClasses = criarClasses;
+module.exports.generateSchemas = generateSchemas;
 
 

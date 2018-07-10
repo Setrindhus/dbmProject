@@ -11,7 +11,12 @@ function gerarOffices(){
             if (err) {
                 throw err;
             }
-            let view = getView(classe);
+            //let view = getView(classe);
+            let view = {
+                title: classe.title,
+                schema: classe.title + 'Schema',
+                db: config.dbname
+            }
             backoffice += "\n" + mustache.render(data.toString(), view);
 
             if(i == config.models.length - 1) {

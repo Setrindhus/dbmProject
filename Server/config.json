@@ -8,16 +8,16 @@
             "destinationPath": "../Publish/Database"
         },
         {
-            "name": "list.mustache",
-            "path": "./StaticFiles/"
+            "originalPath": "./StaticFiles/list.mustache",
+            "destinationPath": "./Publish/Views/list.mustache"
         },
         {
-            "name": "form.mustache",
-            "path": "./StaticFiles/"
+            "originalPath": "./StaticFiles/form.mustache",
+            "destinationPath": "./Publish/Views/form.mustache"
         },
         {
-            "name": "details.mustache",
-            "path": "./StaticFiles/"
+            "originalPath": "./StaticFiles/details.mustache",
+            "destinationPath": "./Publish/Views/details.mustache"
         }
 
     ],

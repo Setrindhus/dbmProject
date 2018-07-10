@@ -36,6 +36,8 @@ app.post('/generate', function (){
 
         classes.criarClasses();
 
+        classes.generateSchemas();
+
         bd.gerarBD();
 
         api.gerarApi();

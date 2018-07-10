@@ -1,6 +1,6 @@
 {
     "port": 8083,
-    "dbname": "labs.db",
+    "dbname": "database.db",
     "staticFiles":
     [
         {

@@ -34,6 +34,11 @@ Produto.prototype.save = function (callback) {
     }
 }
 
+Produto.many = function (model, id, callback) {
+    database.where(`Select Produto.* From Produto Inner Join ${model}_Produto On ${model}_Produto.produto_id =
+     Produto.produto_id Where ${model}_Produto.${model.toLowerCase()}_id = ?`, [id], Produto, callback);
+}
+
 Produto.mappingDBtoObject = {
     id:'id',nome:'nome',preco:'preco',produto_id:'id'
 }

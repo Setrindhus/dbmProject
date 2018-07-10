@@ -32,6 +32,11 @@ Marca.prototype.save = function (callback) {
     }
 }
 
+Marca.many = function (model, id, callback) {
+    database.where(`Select Marca.* From Marca Inner Join ${model}_Marca On ${model}_Marca.marca_id =
+     Marca.marca_id Where ${model}_Marca.${model.toLowerCase()}_id = ?`, [id], Marca, callback);
+}
+
 Marca.mappingDBtoObject = {
     id:'id',nome:'nome',marca_id:'id'
 }

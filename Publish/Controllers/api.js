@@ -32,7 +32,7 @@ router.get('/Categoria', function (req, res) {
 
 router.get('/Categoria/:id', function (req, res) {
     Categoria.get(req.params.id, function (row) {
-    res.json(row);
+        res.json(row);
     });
 });
 
@@ -67,7 +67,7 @@ router.get('/Marca', function (req, res) {
 
 router.get('/Marca/:id', function (req, res) {
     Marca.get(req.params.id, function (row) {
-    res.json(row);
+        res.json(row);
     });
 });
 
@@ -102,7 +102,7 @@ router.get('/Produto', function (req, res) {
 
 router.get('/Produto/:id', function (req, res) {
     Produto.get(req.params.id, function (row) {
-    res.json(row);
+        res.json(row);
     });
 });
 
@@ -137,7 +137,7 @@ router.get('/Venda', function (req, res) {
 
 router.get('/Venda/:id', function (req, res) {
     Venda.get(req.params.id, function (row) {
-    res.json(row);
+        res.json(row);
     });
 });
 

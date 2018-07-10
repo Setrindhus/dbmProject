@@ -3,10 +3,13 @@
     </head>
     <body>
         {{#properties}}
+        <form action="../../../api/{{modelname}}" method="post">
         <div>
             <label>{{name}}:</label>
             <input type="text" value="{{value}}" />
         </div>
         {{/properties}}
+        <input type= "submit" value= "submit" />
+         </form>
     </body>
 </html>

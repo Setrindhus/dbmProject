@@ -5,9 +5,12 @@ var api = require('./Controllers/api.js');
 var frontoffice = require('./Controllers/frontoffice.js');
 var backoffice = require('./Controllers/backoffice.js');
 var mustacheExpress = require('mustache-express');
+var path = require('path');
 
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static(__dirname + 'Publish/Public'));
+
+//app.use(express.static(__dirname + '/Public'));
+app.use(express.static(path.join(__dirname,'Public')));
 app.use('/api', api);
 app.use('/', frontoffice);
 app.use('/backoffice', backoffice);

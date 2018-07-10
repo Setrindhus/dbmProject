@@ -62,7 +62,7 @@ function getView(schema) {
     table: schema.title.toLowerCase(),
     primaryKey: {
         name: "id",
-        columnName: schema.title + "_id"
+        columnName: schema.title.toLowerCase() + "_id"
     },
     properties: function () { //funÃ§Ã£o para converter as propriedades que sÃ£o objectos para um array de objetos (mais fÃ¡cil para processar)
         return Object.keys(schema.properties).map(key => { //converte as propriedades que sÃ£o objectos para um array de objetos (mais fÃ¡cil para processar)
@@ -96,7 +96,15 @@ function getView(schema) {
         var props = this.properties();
         props.push(this.primaryKey);
         return props.map(obj => {
-            return obj.columnName.toLowerCase() + ":'" + obj.name + "'";
+            if(!(obj.columnName.toLowerCase() === this.table + "_id")){
+                if(!(obj.columnName.toLowerCase() === "id")){
+                    return this.table + "_" +obj.columnName.toLowerCase() + ":'" + obj.name + "'";
+                } else {
+                    return obj.columnName.toLowerCase() + ":'" + obj.name + "'";
+                }
+            } else {
+                return obj.columnName.toLowerCase() + ":'" + obj.name + "'";
+            }
         }).join()
     }
 }

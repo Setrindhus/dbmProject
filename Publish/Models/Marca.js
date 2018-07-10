@@ -21,7 +21,7 @@ Marca.get = function (id, callback) {
 
 Marca.delete = function (id, callback) {
     if(this.id){
-        database.run('Delete From Marca Where marca_id = ?', [this.id,this.nome,id],callback);
+        database.run('Delete From Marca Where marca_id = ?', [this.id,this.nome,id],callback); 
     }
 }
 
@@ -39,7 +39,7 @@ Marca.many = function (model, id, callback) {
 }
 
 Marca.mappingDBtoObject = {
-    id:'id',nome:'nome',marca_id:'id'
+    id:'id',marca_nome:'nome',marca_id:'id'
 }
 
 module.exports = Marca;

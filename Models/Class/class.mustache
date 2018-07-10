@@ -21,7 +21,7 @@ var database = require('../../Models/Database/sqlite.js')(dbname);
 
 {{title}}.delete = function (id, callback) {
     if(this.{{primaryKey.name}}){
-        database.run('Delete From {{title}} Where {{table}}_id = ?', [{{{propertiesJoinThis}}},id],callback);
+        database.run('Delete From {{title}} Where {{table}}_id = ?', [{{{propertiesJoinThis}}},id],callback); 
     }
 }
 

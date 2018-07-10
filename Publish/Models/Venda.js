@@ -21,7 +21,7 @@ Venda.get = function (id, callback) {
 
 Venda.delete = function (id, callback) {
     if(this.id){
-        database.run('Delete From Venda Where venda_id = ?', [this.id,this.preco,id],callback);
+        database.run('Delete From Venda Where venda_id = ?', [this.id,this.preco,id],callback); 
     }
 }
 
@@ -39,7 +39,7 @@ Venda.many = function (model, id, callback) {
 }
 
 Venda.mappingDBtoObject = {
-    id:'id',preco:'preco',venda_id:'id'
+    id:'id',venda_preco:'preco',venda_id:'id'
 }
 
 module.exports = Venda;

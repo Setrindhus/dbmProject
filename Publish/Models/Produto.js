@@ -23,7 +23,7 @@ Produto.get = function (id, callback) {
 
 Produto.delete = function (id, callback) {
     if(this.id){
-        database.run('Delete From Produto Where produto_id = ?', [this.id,this.nome,this.preco,id],callback);
+        database.run('Delete From Produto Where produto_id = ?', [this.id,this.nome,this.preco,id],callback); 
     }
 }
 
@@ -41,7 +41,7 @@ Produto.many = function (model, id, callback) {
 }
 
 Produto.mappingDBtoObject = {
-    id:'id',nome:'nome',preco:'preco',produto_id:'id'
+    id:'id',produto_nome:'nome',produto_preco:'preco',produto_id:'id'
 }
 
 module.exports = Produto;

@@ -19,7 +19,7 @@ VendaDetalhe.get = function (id, callback) {
 
 VendaDetalhe.delete = function (id, callback) {
     if(this.id){
-        database.run('Delete From VendaDetalhe Where vendadetalhe_id = ?', [this.id,id],callback);
+        database.run('Delete From VendaDetalhe Where vendadetalhe_id = ?', [this.id,id],callback); 
     }
 }
 

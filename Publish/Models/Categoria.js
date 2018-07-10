@@ -21,7 +21,7 @@ Categoria.get = function (id, callback) {
 
 Categoria.delete = function (id, callback) {
     if(this.id){
-        database.run('Delete From Categoria Where categoria_id = ?', [this.id,this.nome,id],callback);
+        database.run('Delete From Categoria Where categoria_id = ?', [this.id,this.nome,id],callback); 
     }
 }
 
@@ -39,7 +39,7 @@ Categoria.many = function (model, id, callback) {
 }
 
 Categoria.mappingDBtoObject = {
-    id:'id',nome:'nome',categoria_id:'id'
+    id:'id',categoria_nome:'nome',categoria_id:'id'
 }
 
 module.exports = Categoria;

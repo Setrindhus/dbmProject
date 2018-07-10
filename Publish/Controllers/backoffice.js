@@ -16,7 +16,7 @@ var VendaDetalheSchema = require('../Models/VendaDetalheSchema.js');
 app.use(bodyParser.urlencoded({ extended: true }));
 
 
-app.get('/Categoria',function(req,res) {
+app.get('/backoffice/Categoria',function(req,res) {
     console.log("AQUI");
     Categoria.all(function(rows){
             res.render('list',{
@@ -73,7 +73,7 @@ app.get('/Categoria',function(req,res) {
     
 });
 
-app.get('/Categoria/detalhe/:id',function(req,res) {
+app.get('/backoffice/Categoria/detalhe/:id',function(req,res) {
     var dadosCategoria = Categoria.get(req.params.id, function(props){
         res.render('details', {
             properties: function(){
@@ -107,7 +107,7 @@ app.get('/Categoria/detalhe/:id',function(req,res) {
     });
 });
 
-app.get('/Categoria/inserir',function(req,res) {
+app.get('/backoffice/Categoria/inserir',function(req,res) {
     res.render('form',{
 properties: function() {
     var array = [];
@@ -149,7 +149,7 @@ properties: function() {
 
 
 
-app.get('/Categoria/editar/:id',function(req,res){
+app.get('/backoffice/Categoria/editar/:id',function(req,res){
     var dadosCategoria = Categoria.get(req.params.id,function(props){
         res.render('form',{
             title: 'Categoria',
@@ -198,189 +198,7 @@ app.get('/Categoria/editar/:id',function(req,res){
         });		
 	});		
 });
-app.get('/Marca',function(req,res) {
-    console.log("AQUI");
-    Marca.all(function(rows){
-            res.render('list',{
-                title: 'Marca',
-                columns: Object.keys(new Marca()).map(key =>{
-                return {
-                    name: key};
-            }),
-                rows: rows.map(obj =>{
-                    return {
-                        properties: Object.keys(obj).map(key => {
-                            return {
-                                name: key,
-                                value: obj[key]
-                            }
-                        }),
-                        actions:[{
-                            label: '',
-                            link: '#',
-                            image:{
-                                src: '../../Images/delete.png',
-                                alt: 'Apagar'
-                            },
-                            tooltip: 'Apagar',
-                            events: [{
-                                name: "onclick",
-                                function: "apagar",
-                                args: obj.id
-                            }]
-                        }, {
-                            label: '',
-                            link: './Marca/detalhe' + obj.id,
-                            image:{
-                                src: '../../Images/read.png',
-                                alt: 'Detalhes'
-                            },
-                            tooltip: 'Detalhe'
-                        },{
-                            label: '',
-                            link: './Marca/editar/' + obj.id,
-                            image:{
-                                src: '../../Images/edit.png',
-                                alt: 'Editar'
-                            },
-                            tooltip: 'Editar'
-                        }]
-
-                    }
-                })
-            });
-            
-        
-    });
-    
-});
-
-app.get('/Marca/detalhe/:id',function(req,res) {
-    var dadosMarca = Marca.get(req.params.id, function(props){
-        res.render('details', {
-            properties: function(){
-                var array = [];
-                var rows = Object.getOwnPropertyNames(props);
-                rows.forEach(element => {
-                    if(MarcaSchema.properties.hasOwnProperty(element)){
-                        array.push({name: element, value: props[element]});
-                    }
-                });
-                return array;
-            },
-            references: function(){
-                var allReferences = [];
-                if(MarcaSchema.references){
-                    MarcaSchema.references.forEach(function (r) {
-                        allReferences.push({
-                            label: r.label,
-                            model: r.model,
-                            values: r.relation == "M-M" ? Marca + '/' + req.params.id :
-                                props[(r.model + "_id").toLowerCase()]
-                        });
-                    });
-                }
-                return allReferences;
-            },
-            get hasReferences(){
-                return this.hasReferences().length > 0;
-            }
-        });
-    });
-});
-
-app.get('/Marca/inserir',function(req,res) {
-    res.render('form',{
-properties: function() {
-    var array = [];
-    var rows = Object.getOwnPropertyNames(new Marca());
-    rows.forEach(element => {
-        props = MarcaSchema.properties;
-        if (props.hasOwnProperty(element)) {
-            var min, max;
-            var elem = props[element];
-            if (elem.hasOwnProperty('minimum')) min = `min="${elem.minimum}"`;
-            if (elem.hasOwnProperty('maximum')) max = `max="${elem.maximum}"`;
-            array.push({ name: element, minimum: min, maximum: max });
-            }
-        });
-        return array;
-        },
-            references: function () {
-                var allReferences = [];
-                if (MarcaSchema.references) {
-                    MarcaSchema.references.forEach(function (r) {
-                        allReferences.push({
-                            id: r.model.concat('Id'),
-                            label: r.label,
-                            model: r.model,
-                            relation: r.relation == '1-M',
-                            type : 'insert',
-                            bdId: r.model.toLowerCase().concat('_id')
-                        });
-                    });
-                }
-                return allReferences;
-            },
-            get hasReferences() {
-                return this.references().length > 0;
-            },
-            modelname : Marca
-        });
-    });
-
-
-
-app.get('/Marca/editar/:id',function(req,res){
-    var dadosMarca = Marca.get(req.params.id,function(props){
-        res.render('form',{
-            title: 'Marca',
-            Marca: req.params.id,
-            properties: function(){
-                var array = [];		
-                var rows = Object.getOwnPropertyNames(props);		
-	            rows.forEach(element => {		
-	                prop = Marca.properties;		
-	                if (prop.hasOwnProperty(element)) {		
-	                    var min, max;		
-	                    var elem = prop[element];		
-	                    if (elem.hasOwnProperty('minimum')) min = `min="${elem.minimum}"`;		
-	                    if (elem.hasOwnProperty('maximum')) max = `max="${elem.maximum}"`;		
-	                    array.push({ name: element, minimum: min, maximum: max, value: props[element] });		
-	                }		
-	            });		
-	            return array;		
-	        },		
-	        references: function () {		
-	            var allReferences = [];		
-	            if (Marca.references) {		
-	                Marca.references.forEach(function (ref) {		
-	                    allReferences.push({		
-	                        id: ref.model.concat('Id'),		
-	                        label: ref.label,		
-	                        model: ref.model,
-                            type : 'edit',	
-	                        relation: ref.relation == '1-M',
-                            bd_id: ref.model.toLowerCase() + "_id",
-	                        values: function(){
-                                var x;
-                                if(this.relation)
-                                    x = props[(ref.model + "_id").toLowerCase()]
-                                else x = 'Marca/' + req.params.id
-                                return x;
-                            }
-	                    });		
-	                });		
-	            }		
-	            return allReferences;		
-	        },		
-	        get hasReferences() {		
-	            return this.references().length > 0;		
-	        }		
-        });		
-	});		
-});
-app.get('/Produto',function(req,res) {
+app.get('/backoffice/Produto',function(req,res) {
     console.log("AQUI");
     Produto.all(function(rows){
             res.render('list',{
@@ -437,7 +255,7 @@ app.get('/Produto',function(req,res) {
     
 });
 
-app.get('/Produto/detalhe/:id',function(req,res) {
+app.get('/backoffice/Produto/detalhe/:id',function(req,res) {
     var dadosProduto = Produto.get(req.params.id, function(props){
         res.render('details', {
             properties: function(){
@@ -471,7 +289,7 @@ app.get('/Produto/detalhe/:id',function(req,res) {
     });
 });
 
-app.get('/Produto/inserir',function(req,res) {
+app.get('/backoffice/Produto/inserir',function(req,res) {
     res.render('form',{
 properties: function() {
     var array = [];
@@ -513,7 +331,7 @@ properties: function() {
 
 
 
-app.get('/Produto/editar/:id',function(req,res){
+app.get('/backoffice/Produto/editar/:id',function(req,res){
     var dadosProduto = Produto.get(req.params.id,function(props){
         res.render('form',{
             title: 'Produto',
@@ -562,7 +380,189 @@ app.get('/Produto/editar/:id',function(req,res){
         });		
 	});		
 });
-app.get('/Venda',function(req,res) {
+app.get('/backoffice/Marca',function(req,res) {
+    console.log("AQUI");
+    Marca.all(function(rows){
+            res.render('list',{
+                title: 'Marca',
+                columns: Object.keys(new Marca()).map(key =>{
+                return {
+                    name: key};
+            }),
+                rows: rows.map(obj =>{
+                    return {
+                        properties: Object.keys(obj).map(key => {
+                            return {
+                                name: key,
+                                value: obj[key]
+                            }
+                        }),
+                        actions:[{
+                            label: '',
+                            link: '#',
+                            image:{
+                                src: '../../Images/delete.png',
+                                alt: 'Apagar'
+                            },
+                            tooltip: 'Apagar',
+                            events: [{
+                                name: "onclick",
+                                function: "apagar",
+                                args: obj.id
+                            }]
+                        }, {
+                            label: '',
+                            link: './Marca/detalhe' + obj.id,
+                            image:{
+                                src: '../../Images/read.png',
+                                alt: 'Detalhes'
+                            },
+                            tooltip: 'Detalhe'
+                        },{
+                            label: '',
+                            link: './Marca/editar/' + obj.id,
+                            image:{
+                                src: '../../Images/edit.png',
+                                alt: 'Editar'
+                            },
+                            tooltip: 'Editar'
+                        }]
+
+                    }
+                })
+            });
+            
+        
+    });
+    
+});
+
+app.get('/backoffice/Marca/detalhe/:id',function(req,res) {
+    var dadosMarca = Marca.get(req.params.id, function(props){
+        res.render('details', {
+            properties: function(){
+                var array = [];
+                var rows = Object.getOwnPropertyNames(props);
+                rows.forEach(element => {
+                    if(MarcaSchema.properties.hasOwnProperty(element)){
+                        array.push({name: element, value: props[element]});
+                    }
+                });
+                return array;
+            },
+            references: function(){
+                var allReferences = [];
+                if(MarcaSchema.references){
+                    MarcaSchema.references.forEach(function (r) {
+                        allReferences.push({
+                            label: r.label,
+                            model: r.model,
+                            values: r.relation == "M-M" ? Marca + '/' + req.params.id :
+                                props[(r.model + "_id").toLowerCase()]
+                        });
+                    });
+                }
+                return allReferences;
+            },
+            get hasReferences(){
+                return this.hasReferences().length > 0;
+            }
+        });
+    });
+});
+
+app.get('/backoffice/Marca/inserir',function(req,res) {
+    res.render('form',{
+properties: function() {
+    var array = [];
+    var rows = Object.getOwnPropertyNames(new Marca());
+    rows.forEach(element => {
+        props = MarcaSchema.properties;
+        if (props.hasOwnProperty(element)) {
+            var min, max;
+            var elem = props[element];
+            if (elem.hasOwnProperty('minimum')) min = `min="${elem.minimum}"`;
+            if (elem.hasOwnProperty('maximum')) max = `max="${elem.maximum}"`;
+            array.push({ name: element, minimum: min, maximum: max });
+            }
+        });
+        return array;
+        },
+            references: function () {
+                var allReferences = [];
+                if (MarcaSchema.references) {
+                    MarcaSchema.references.forEach(function (r) {
+                        allReferences.push({
+                            id: r.model.concat('Id'),
+                            label: r.label,
+                            model: r.model,
+                            relation: r.relation == '1-M',
+                            type : 'insert',
+                            bdId: r.model.toLowerCase().concat('_id')
+                        });
+                    });
+                }
+                return allReferences;
+            },
+            get hasReferences() {
+                return this.references().length > 0;
+            },
+            modelname : Marca
+        });
+    });
+
+
+
+app.get('/backoffice/Marca/editar/:id',function(req,res){
+    var dadosMarca = Marca.get(req.params.id,function(props){
+        res.render('form',{
+            title: 'Marca',
+            Marca: req.params.id,
+            properties: function(){
+                var array = [];		
+                var rows = Object.getOwnPropertyNames(props);		
+	            rows.forEach(element => {		
+	                prop = Marca.properties;		
+	                if (prop.hasOwnProperty(element)) {		
+	                    var min, max;		
+	                    var elem = prop[element];		
+	                    if (elem.hasOwnProperty('minimum')) min = `min="${elem.minimum}"`;		
+	                    if (elem.hasOwnProperty('maximum')) max = `max="${elem.maximum}"`;		
+	                    array.push({ name: element, minimum: min, maximum: max, value: props[element] });		
+	                }		
+	            });		
+	            return array;		
+	        },		
+	        references: function () {		
+	            var allReferences = [];		
+	            if (Marca.references) {		
+	                Marca.references.forEach(function (ref) {		
+	                    allReferences.push({		
+	                        id: ref.model.concat('Id'),		
+	                        label: ref.label,		
+	                        model: ref.model,
+                            type : 'edit',	
+	                        relation: ref.relation == '1-M',
+                            bd_id: ref.model.toLowerCase() + "_id",
+	                        values: function(){
+                                var x;
+                                if(this.relation)
+                                    x = props[(ref.model + "_id").toLowerCase()]
+                                else x = 'Marca/' + req.params.id
+                                return x;
+                            }
+	                    });		
+	                });		
+	            }		
+	            return allReferences;		
+	        },		
+	        get hasReferences() {		
+	            return this.references().length > 0;		
+	        }		
+        });		
+	});		
+});
+app.get('/backoffice/Venda',function(req,res) {
     console.log("AQUI");
     Venda.all(function(rows){
             res.render('list',{
@@ -619,7 +619,7 @@ app.get('/Venda',function(req,res) {
     
 });
 
-app.get('/Venda/detalhe/:id',function(req,res) {
+app.get('/backoffice/Venda/detalhe/:id',function(req,res) {
     var dadosVenda = Venda.get(req.params.id, function(props){
         res.render('details', {
             properties: function(){
@@ -653,7 +653,7 @@ app.get('/Venda/detalhe/:id',function(req,res) {
     });
 });
 
-app.get('/Venda/inserir',function(req,res) {
+app.get('/backoffice/Venda/inserir',function(req,res) {
     res.render('form',{
 properties: function() {
     var array = [];
@@ -695,7 +695,7 @@ properties: function() {
 
 
 
-app.get('/Venda/editar/:id',function(req,res){
+app.get('/backoffice/Venda/editar/:id',function(req,res){
     var dadosVenda = Venda.get(req.params.id,function(props){
         res.render('form',{
             title: 'Venda',
@@ -744,7 +744,7 @@ app.get('/Venda/editar/:id',function(req,res){
         });		
 	});		
 });
-app.get('/VendaDetalhe',function(req,res) {
+app.get('/backoffice/VendaDetalhe',function(req,res) {
     console.log("AQUI");
     VendaDetalhe.all(function(rows){
             res.render('list',{
@@ -801,7 +801,7 @@ app.get('/VendaDetalhe',function(req,res) {
     
 });
 
-app.get('/VendaDetalhe/detalhe/:id',function(req,res) {
+app.get('/backoffice/VendaDetalhe/detalhe/:id',function(req,res) {
     var dadosVendaDetalhe = VendaDetalhe.get(req.params.id, function(props){
         res.render('details', {
             properties: function(){
@@ -835,7 +835,7 @@ app.get('/VendaDetalhe/detalhe/:id',function(req,res) {
     });
 });
 
-app.get('/VendaDetalhe/inserir',function(req,res) {
+app.get('/backoffice/VendaDetalhe/inserir',function(req,res) {
     res.render('form',{
 properties: function() {
     var array = [];
@@ -877,7 +877,7 @@ properties: function() {
 
 
 
-app.get('/VendaDetalhe/editar/:id',function(req,res){
+app.get('/backoffice/VendaDetalhe/editar/:id',function(req,res){
     var dadosVendaDetalhe = VendaDetalhe.get(req.params.id,function(props){
         res.render('form',{
             title: 'VendaDetalhe',

@@ -17,7 +17,6 @@ var VendaDetalheSchema = require('../Models/VendaDetalheSchema.js');
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get('/',function(req,res) {
-     console.log('AQUI')
        res.render('index', {
          port:'8083'
    });

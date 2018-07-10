@@ -53,7 +53,7 @@ function gerarBD() {
         var view = {
             title: json.title,
             tableElements: tableElements,
-            foreignKeys: getFKs(json)
+            foreignKeys: getForeignKeys(json)
         }
 
         data = fs.readFileSync('./Models/Database/create-table.mustache');
@@ -64,7 +64,7 @@ function gerarBD() {
 
 }
 
-function getFKs(json) {
+function getForeignKeys(json) {
     var fk = "";
     if (json.hasOwnProperty('references')) {
         json.references.forEach(model => {

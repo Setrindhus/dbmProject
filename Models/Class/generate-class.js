@@ -40,6 +40,7 @@ function generateSchemas(){
     copyFileContent('./Publish/Models/marcaSchema.js', './Models/Schemas/Marca.js');
     copyFileContent('./Publish/Models/produtoSchema.js', './Models/Schemas/Produto.js');
     copyFileContent('./Publish/Models/vendaSchema.js', './Models/Schemas/Venda.js');
+    copyFileContent('./Publish/Models/vendaDetalheSchema.js', './Models/Schemas/VendaDetalhe.js');
 
     //sqlite para a pasta Database
     copyFileContent('./Publish/Database/sqlite.js','./Models/Database/sqlite.js');

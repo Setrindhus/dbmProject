@@ -1,0 +1,19 @@
+{
+    "title": "Venda Detalhe",
+    "description": "Detalhe da venda",
+    "type": "object",
+    "required": [
+        "produto",
+        "venda"
+    ],
+    "references": [
+        {
+            "model": "Venda",
+            "relation": "M-M"
+        },
+        {
+            "model": "Produto",
+            "relation": "M-M"
+        }
+    ]
+}

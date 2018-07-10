@@ -32,6 +32,11 @@ var database = require('../../Models/Database/sqlite.js')(dbname);
     }
 }
 
+{{title}}.many = function (model, id, callback) {
+    database.where(`Select {{title}}.* From {{title}} Inner Join ${model}_{{title}} On ${model}_{{title}}.{{table}}_id =
+     {{title}}.{{table}}_id Where ${model}_{{title}}.${model.toLowerCase()}_id = ?`, [id], {{title}}, callback);
+}
+
 {{title}}.mappingDBtoObject = {
     {{{mappingDBtoObject}}}
 }

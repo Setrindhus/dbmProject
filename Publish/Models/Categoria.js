@@ -32,6 +32,11 @@ Categoria.prototype.save = function (callback) {
     }
 }
 
+Categoria.many = function (model, id, callback) {
+    database.where(`Select Categoria.* From Categoria Inner Join ${model}_Categoria On ${model}_Categoria.categoria_id =
+     Categoria.categoria_id Where ${model}_Categoria.${model.toLowerCase()}_id = ?`, [id], Categoria, callback);
+}
+
 Categoria.mappingDBtoObject = {
     id:'id',nome:'nome',categoria_id:'id'
 }

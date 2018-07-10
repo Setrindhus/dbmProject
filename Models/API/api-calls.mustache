@@ -12,7 +12,7 @@ router.get('/{{title}}', function (req, res) {
 
 router.get('/{{title}}/:id', function (req, res) {
     {{title}}.get(req.params.id, function (row) {
-    res.json(row);
+        res.json(row);
     });
 });
 

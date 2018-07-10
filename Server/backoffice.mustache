@@ -1,4 +1,5 @@
 app.get('/{{title}}',function(req,res) {
+    console.log("AQUI");
     {{title}}.all(function(rows){
             res.render('list',{
                 title: '{{title}}',
@@ -68,10 +69,10 @@ app.get('/{{title}}/detalhe/:id',function(req,res) {
                 return array;
             },
             references: function(){
-                var allReferencies = [];
+                var allReferences = [];
                 if({{schema}}.references){
                     {{schema}}.references.forEach(function (r) {
-                        allReferencies.push({
+                        allReferences.push({
                             label: r.label,
                             model: r.model,
                             values: r.relation == "M-M" ? {{db}} + '/' + req.params.id :
@@ -79,7 +80,7 @@ app.get('/{{title}}/detalhe/:id',function(req,res) {
                         });
                     });
                 }
-                return allReferencies;
+                return allReferences;
             },
             get hasReferences(){
                 return this.hasReferences().length > 0;
@@ -105,7 +106,7 @@ properties: function() {
         return array;
         },
             references: function () {
-                var allReferencies = [];
+                var allReferences = [];
                 if ({{schema}}.references) {
                     {{schema}}.references.forEach(function (r) {
                         allRefs.push({
@@ -116,7 +117,7 @@ properties: function() {
                         });
                     });
                 }
-                return allReferencies;
+                return allReferences;
             },
             get hasReferences() {
                 return this.references().length > 0;
@@ -147,16 +148,16 @@ app.get('/{{title}}/editar/:id',function(req,res){
 	            return arr;		
 	        },		
 	        references: function () {		
-	            var allReferencies = [];		
+	            var allReferences = [];		
 	            if ({{title}}.references) {		
 	                {{title}}.references.forEach(function (ref) {		
-	                    allReferencies.push({		
+	                    allReferences.push({		
 	                        id: ref.model.concat('Id'),		
 	                        label: ref.label,		
 	                        model: ref.model,
                             type : 'edit',	
 	                        relation: ref.relation == '1-M',
-                            bdId: ref.model.toLowerCase().concat('_id'),
+                            bd_id: ref.model.toLowerCase() + "_id",
 	                        values: function(){
                                 var x;
                                 if(this.relation)
@@ -167,7 +168,7 @@ app.get('/{{title}}/editar/:id',function(req,res){
 	                    });		
 	                });		
 	            }		
-	            return allReferencies;		
+	            return allReferences;		
 	        },		
 	        get hasReferences() {		
 	            return this.references().length > 0;		
